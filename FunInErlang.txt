@@ -1,0 +1,20 @@
+Double(X) = fun(X) -> 2*X end.
+
+ConvertTemp = fun({c, C}) -> {f, 32 + C*9/5};    
+                 ({f, F}) -> {c, (F-32)*5/9} end.
+ConvertTemp({c, 32}).
+
+// Fun as argument
+Even = fun(X) -> (X rem 2) =:= 0 end.
+lists:map(Even, L).
+lists:filter(Even, L).
+
+// Fun return fun
+Fruit = [apple,pear,orange].
+MakeTest = fun(L) -> ( fun(X) -> lists:member(X, L) end ) end.
+IsFruit = MakeTest(Fruit).
+IsFruit(apple).
+
+// Generalization
+Multiple = fun(Times) -> (fun(X) -> X * Times end) end.
+Thrice = Multiple(3).
